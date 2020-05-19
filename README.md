@@ -8,13 +8,18 @@
 [![Latest version on PyPi](https://badge.fury.io/py/decorate-me.svg)](https://pypi.org/project/decorate-me/)
 [![Documentation status](https://readthedocs.org/projects/decorate-me/badge/?version=latest&style=flat-square)](https://decorate-me.readthedocs.io/en/stable/)
 [![Build & test](https://github.com/dmyersturnbull/decorate-me/workflows/Build%20&%20test/badge.svg)](https://github.com/dmyersturnbull/decorate-me/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/<<apikey>>/maintainability)](https://codeclimate.com/github/dmyersturnbull/decorate-me/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ce5a27b46cbe0f3c3039/maintainability)](https://codeclimate.com/github/dmyersturnbull/decorate-me/maintainability)
 [![Coverage](https://coveralls.io/repos/github/dmyersturnbull/decorate-me/badge.svg?branch=master)](https://coveralls.io/github/dmyersturnbull/decorate-me?branch=master)
 
 Python decorators for str/repr, equality, immutability, and more.
 
-Save lines, ease debugging, and document your class’s behavior at the top.
+Save lines and document your class’s behavior at the top.
 Just `pip install decorateme` and `import decorateme`.
+
+
+[New issues](https://github.com/dmyersturnbull/decorate-me/issues) and pull requests are welcome.
+Please refer to the [contributing guide](https://github.com/dmyersturnbull/decorate-me/blob/master/CONTRIBUTING.md).
+Generated with [Tyrannosaurus](https://github.com/dmyersturnbull/tyrannosaurus).
 
 
 ### List of decorators
@@ -94,8 +99,3 @@ assert light1 == light2 != heavy
 print(light1)  # 'Duo(weight=22.3)'
 assert light1 * heavy == 39.68
 ```
-
-
-[New issues](https://github.com/dmyersturnbull/decorate-me/issues) and pull requests are welcome.
-Please refer to the [contributing guide](https://github.com/dmyersturnbull/decorate-me/blob/master/CONTRIBUTING.md).
-Generated with [Tyrannosaurus](https://github.com/dmyersturnbull/tyrannosaurus).
