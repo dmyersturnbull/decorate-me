@@ -1,11 +1,11 @@
 # Decorate-me
 
-[![Version status](https://img.shields.io/pypi/status/decorate-me)](https://pypi.org/project/decorate-me/)
+[![Version status](https://img.shields.io/pypi/status/decorateme)](https://pypi.org/project/decorateme/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/decorate-me)](https://pypi.org/project/decorate-me/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/decorateme)](https://pypi.org/project/decorateme/)
 [![Docker](https://img.shields.io/docker/v/dmyersturnbull/decorate-me?color=green&label=DockerHub)](https://hub.docker.com/repository/docker/dmyersturnbull/decorate-me)
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/dmyersturnbull/decorate-me?include_prereleases&label=GitHub)](https://github.com/dmyersturnbull/decorate-me/releases)
-[![Latest version on PyPi](https://badge.fury.io/py/decorate-me.svg)](https://pypi.org/project/decorate-me/)
+[![Latest version on PyPi](https://badge.fury.io/py/decorateme.svg)](https://pypi.org/project/decorateme/)
 [![Documentation status](https://readthedocs.org/projects/decorate-me/badge/?version=latest&style=flat-square)](https://decorate-me.readthedocs.io/en/stable/)
 [![Build & test](https://github.com/dmyersturnbull/decorate-me/workflows/Build%20&%20test/badge.svg)](https://github.com/dmyersturnbull/decorate-me/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ce5a27b46cbe0f3c3039/maintainability)](https://codeclimate.com/github/dmyersturnbull/decorate-me/maintainability)
