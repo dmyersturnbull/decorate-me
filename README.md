@@ -17,7 +17,7 @@ Save lines, ease debugging, and document your class’s behavior at the top.
 Just `pip install decorateme` and `import decorateme`.
 
 
-#### List of decorators
+### List of decorators
 
 **String-like methods**
 - auto_repr_str
