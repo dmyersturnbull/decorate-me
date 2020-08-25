@@ -1,5 +1,5 @@
 """
-Sphinx config file for Tyrannosaurus.
+Sphinx config file.
 
 Uses several extensions to get API docs and sourcecode.
 https://www.sphinx-doc.org/en/master/usage/configuration.html
@@ -22,7 +22,7 @@ project = find("name")
 version = find("version")
 release = find("version")
 author = ", ".join(find("authors"))
-copyright = "Copyright (2020)"
+copyright = "Copyright (2017–2020)"
 
 
 extensions = ["autoapi.extension", "sphinx.ext.napoleon", "sphinx_rtd_theme"]

@@ -16,7 +16,7 @@ try:
     metadata = __load(Path(__file__).parent.name)
     __status__ = "Development"
     __copyright__ = "Copyright 2017–2020"
-    __date__ = "2020-05-18"
+    __date__ = "2020-08-24"
     __uri__ = metadata["home-page"]
     __title__ = metadata["name"]
     __summary__ = metadata["summary"]

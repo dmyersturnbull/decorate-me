@@ -142,10 +142,11 @@ class _Utils:
 
 def auto_eq(only: Optional[Set[str]] = None, exclude: Optional[Callable[[str], bool]] = None):
     """
-    Decorator.
-    Auto-adds a __eq__ function by comparing its attributes.
-    :param only: Only include these attributes
-    :param exclude: Exclude these attributes
+    Decorator. Auto-adds a __eq__ function by comparing its attributes.
+
+    Args:
+        only: Only include these attributes
+        exclude: Exclude these attributes
     """
 
     @wraps(auto_eq)
@@ -161,10 +162,11 @@ def auto_eq(only: Optional[Set[str]] = None, exclude: Optional[Callable[[str], b
 
 def auto_hash(only: Optional[Set[str]] = None, exclude: Optional[Callable[[str], bool]] = None):
     """
-    Decorator.
-    Auto-adds a __hash__ function by hashing its attributes.
-    :param only: Only include these attributes
-    :param exclude: Exclude these attributes
+    Decorator. Auto-adds a __hash__ function by hashing its attributes.
+
+    Args:
+        only: Only include these attributes
+        exclude: Exclude these attributes
     """
 
     @wraps(auto_hash)
@@ -181,6 +183,13 @@ def auto_hash(only: Optional[Set[str]] = None, exclude: Optional[Callable[[str],
 def auto_repr(
     only: Optional[Set[str]] = None, exclude: Optional[Callable[[str], bool]] = lambda a: False,
 ):
+    """
+    Decorator. Auto-adds __repr__ and __str__.
+
+    Args:
+        only: Only include these attributes
+        exclude: Exclude these attributes
+    """
     @wraps(auto_repr)
     def dec(cls):
         def __repr(self):
@@ -197,6 +206,14 @@ def auto_str(
     exclude: Optional[Callable[[str], bool]] = lambda a: a.startswith("_"),
     with_address: bool = False,
 ):
+    """
+    Decorator. Auto-adds __str__.
+
+    Args:
+        only: Only include these attributes
+        exclude: Exclude these attributes
+        with_address: Include the hex memory address
+    """
     @wraps(auto_str)
     def dec(cls):
         def __str(self):
@@ -213,6 +230,14 @@ def auto_html(
     exclude: Optional[Callable[[str], bool]] = lambda a: lambda b: b.startswith("_"),
     with_address: bool = True,
 ):
+    """
+    Decorator. Auto-adds a ``_repr_html`` method, which Jupyter will use.
+
+    Args:
+        only: Only include these attributes
+        exclude: Exclude these attributes
+        with_address: Include the hex memory address
+    """
     @wraps(auto_html)
     def dec(cls):
         def __html(self):
@@ -240,19 +265,23 @@ def auto_repr_str(
 ):
     """
     Decorator.
-    Auto-adds __repr__, __str__, and __md that show the attributes:
+    Auto-adds __repr__, __str__, and _repr_html that show the attributes:
         - __str__ will include attributes in neither exclude_all nor exclude_simple
         - _repr_html_ will include attributes in neither exclude_all nor exclude_simple
             and will show the hexadecimal address
         - __repr__ will include attributes not in exclude_all and will show the hexadecimal address
+
     The _repr_html_ will be used by Jupyter display.
+
     Examples:
-        repr(point) == Point(angle=0.3, radius=4, _style='point' @ 0x5528ca3)
-        str(point) == Point(angle=0.3, radius=4)
-        _repr_html_(point) == Point(angle=0.3, radius=4 @ 0x5528ca3)
-    :param exclude_simple: Exclude attributes matching these names in human-readable strings (str and _repr_html)
-    :param exclude_html: Exclude for _repr_html
-    :param exclude_all: Exclude these attributes in all the functions
+        - ``repr(point) == Point(angle=0.3, radius=4, _style='point' @ 0x5528ca3)``
+        - ``str(point) == Point(angle=0.3, radius=4)``
+        - ``_repr_html_(point) == Point(angle=0.3, radius=4 @ 0x5528ca3)``
+
+    Args:
+        exclude_simple: Exclude attributes matching these names in human-readable strings (str and _repr_html)
+        exclude_html: Exclude for _repr_html
+        exclude_all: Exclude these attributes in all the functions
     """
 
     @wraps(auto_repr_str)
@@ -288,10 +317,11 @@ def auto_info(
     exclude: Optional[Callable[[str], bool]] = lambda a: a.startswith("_"),
 ):
     """
-    Decorator.
-    Auto-adds a function 'info' that outputs a pretty multi-line representation of the instance and its attributes.
-    :param only:
-    :param exclude:
+    Decorator. Auto-adds a function ``info`` that outputs a pretty multi-line representation of the instance and its attributes.
+
+    Args:
+        only: Only include these attributes
+        exclude: Exclude these attributes
     """
 
     @wraps(auto_info)
@@ -318,7 +348,7 @@ def auto_info(
 
 def auto_obj():
     """
-    Auto-adds __eq__, __hash__, __repr__, __str__, and _repr_html_.
+    Auto-adds ``__eq__``, ``__hash__``, ``__repr__``, ``__str__``, and ``_repr_html``.
     See the decorators for auto_eq, auto_hash, and auto_repr for more details.
     """
 
@@ -415,8 +445,7 @@ def immutable(mutableclass):
 
 def copy_docstring(from_obj: Type):
     """
-    Decorator.
-    Copies the docstring from `from_obj` to this function or class.
+    Decorator. Copies the docstring from `from_obj` to this function or class.
     """
 
     @wraps(copy_docstring)
@@ -429,8 +458,7 @@ def copy_docstring(from_obj: Type):
 
 def append_docstring(from_obj: Type):
     """
-    Decorator.
-    Appends the docstring from `from_obj` to the docstring for this function or class.
+    Decorator. Appends the docstring from `from_obj` to the docstring for this function or class.
     """
 
     @wraps(append_docstring)
@@ -443,10 +471,11 @@ def append_docstring(from_obj: Type):
 
 def float_type(attribute: str):
     """
-    Decorator.
-    Auto-adds a __float__ using the __float__ of some attribute.
+    Decorator. Auto-adds a ``__float__`` using the ``__float__`` of some attribute.
     Used to annotate a class as being "essentially an float".
-    :param attribute: The name of the attribute of this class
+
+    Args:
+        attribute: The name of the attribute of this class
     """
 
     def __f(self):
@@ -462,10 +491,11 @@ def float_type(attribute: str):
 
 def int_type(attribute: str):
     """
-    Decorator.
-    Auto-adds an __int__ using the __int__ of some attribute.
+    Decorator. Auto-adds an ``__int__`` using the ``__int__`` of some attribute.
     Used to annotate a class as being "essentially an integer".
-    :param attribute: The name of the attribute of this class
+
+    Args:
+        attribute: The name of the attribute of this class
     """
 
     def __f(self):
@@ -485,10 +515,11 @@ def int_type(attribute: str):
 
 def iterable_over(attribute: str):
     """
-    Decorator.
-    Auto-adds an __iter__ over elements in an iterable attribute.
+    Decorator. Auto-adds an ``__iter__`` over elements in an iterable attribute.
     Used to annotate a class as being "essentially an iterable" over some elements.
-    :param attribute: The name of the attribute of this class
+
+    Args:
+        attribute: The name of the attribute of this class
     """
 
     def __x(self):
@@ -504,10 +535,11 @@ def iterable_over(attribute: str):
 
 def collection_over(attribute: str):
     """
-    Decorator.
-    Auto-adds an __iter__ and __len__ over elements in a collection attribute.
+    Decorator. Auto-adds an ``__iter__`` and ``__len__`` over elements in a collection attribute.
     Used to annotate a class as being "essentially a collection" over some elements.
-    :param attribute: The name of the attribute of this class
+
+    Args:
+        attribute: The name of the attribute of this class
     """
 
     def __len(self):
@@ -527,10 +559,11 @@ def collection_over(attribute: str):
 
 def sequence_over(attribute: str):
     """
-    Decorator.
-    Auto-adds __getitem__ and __len__ over elements in an iterable attribute.
+    Decorator. Auto-adds ``__getitem__`` and ``__len__`` over elements in an iterable attribute.
     Used to annotate a class as being "essentially a list" over some elements.
-    :param attribute: The name of the attribute of this class
+
+    Args:
+        attribute: The name of the attribute of this class
     """
 
     def __len(self):
@@ -576,6 +609,9 @@ def auto_singleton(cls):
 def status(level: CodeStatus):
     """
     Decorator. Annotate code quality. Emits a warning if bad code is called.
+
+    Args:
+        level: The quality / maturity as an enum
     """
 
     @wraps(status)
