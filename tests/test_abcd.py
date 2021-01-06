@@ -1,5 +1,4 @@
 import pytest
-import os
 import re
 from decorateme import abcd
 from decorateme.abcd import CodeIncompleteError

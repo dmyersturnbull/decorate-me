@@ -35,6 +35,11 @@ class ImmatureWarning(CodeWarning):
 
 @enum.unique
 class CodeStatus(enum.Enum):
+    """
+    An enum for the quality/maturity of code,
+    ranging from incomplete to deprecated.
+    """
+
     Incomplete = 0
     Immature = 1
     Preview = 2
@@ -129,7 +134,11 @@ class _Utils:
 
     @classmethod
     def auto_eq(
-        cls, self, other, only: Optional[Set[str]], exclude: Optional[Callable[[str], bool]],
+        cls,
+        self,
+        other,
+        only: Optional[Set[str]],
+        exclude: Optional[Callable[[str], bool]],
     ):
         if type(self) != type(other):
             raise TypeError("Type {} is not the same as type {}".format(type(self), type(other)))
@@ -181,7 +190,8 @@ def auto_hash(only: Optional[Set[str]] = None, exclude: Optional[Callable[[str],
 
 
 def auto_repr(
-    only: Optional[Set[str]] = None, exclude: Optional[Callable[[str], bool]] = lambda a: False,
+    only: Optional[Set[str]] = None,
+    exclude: Optional[Callable[[str], bool]] = lambda a: False,
 ):
     """
     Decorator. Auto-adds __repr__ and __str__.
@@ -190,6 +200,7 @@ def auto_repr(
         only: Only include these attributes
         exclude: Exclude these attributes
     """
+
     @wraps(auto_repr)
     def dec(cls):
         def __repr(self):
@@ -214,6 +225,7 @@ def auto_str(
         exclude: Exclude these attributes
         with_address: Include the hex memory address
     """
+
     @wraps(auto_str)
     def dec(cls):
         def __str(self):
@@ -238,6 +250,7 @@ def auto_html(
         exclude: Exclude these attributes
         with_address: Include the hex memory address
     """
+
     @wraps(auto_html)
     def dec(cls):
         def __html(self):
@@ -408,6 +421,9 @@ def takes_seconds(x, *args, **kwargs):
 
 
 def mutable(cls):
+    """
+    Decorator. Just marks an object as mutable.
+    """
     return cls
 
 
@@ -421,6 +437,7 @@ def immutable(mutableclass):
         raise TypeError("@immutable: must be applied to a new-style class")
     if not hasattr(mutableclass, "__slots__"):
         raise TypeError("@immutable: class must have __slots__")
+
     # noinspection PyPep8Naming
     class immutableclass(mutableclass):
         __slots__ = ()  # No __dict__, please
@@ -646,20 +663,32 @@ def status(level: CodeStatus):
                 return func(*args, **kwargs)
 
             return wraps(func)(my_fn)
-        assert False
+        raise AssertionError(f"What is {level}?")
 
     return dec
 
 
 @status(CodeStatus.Immature)
 def auto_timeout(seconds: int):
+    """
+    Decorator. The decorated function will be subject to a timeout of ``seconds``.
+    If it takes longer than that, it will raise a ``TimeoutError``.
+
+    Note::
+
+        Uses ``signal.alarm`` for interruption.
+
+    Raises:
+        NotImplementedError: If running on Windows
+        TimeoutError: The call took too long
+    """
     if os.name.lower() == "nt":
         raise NotImplementedError("Cannot use @auto_timeout on Windows")
 
     @wraps(auto_timeout)
     def dec(func):
         def _handle_timeout(the_signal, the_frame):
-            raise TimeoutError("The call timed out")
+            raise TimeoutError(f"The call timed out after {seconds} s")
 
         def my_fn(*args, **kwargs):
             signal.signal(signal.SIGALRM, _handle_timeout)
@@ -711,16 +740,22 @@ def reserved(cls):
 
 
 def thread_safe(cls):
+    """
+    Decorator. Just marks that something **is** thread-safe.
+    """
     return cls
 
 
 def not_thread_safe(cls):
+    """
+    Decorator. Just marks that something is **not** thread-safe.
+    """
     return cls
 
 
 def final(cls):
     """
-    Decorator. Do not override this.
+    Decorator. Marks as "should not override".
     """
     return cls
 

@@ -1,21 +1,22 @@
 """
-Metadata for Tyrannosaurus.
+Metadata for decorateme.
 """
 
 import logging
 from pathlib import Path
 
-# importlib.metadata is compat with Python 3.8 only
-from importlib_metadata import PackageNotFoundError, metadata as __load
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import metadata as __load
 
 from decorateme.abcd import *
 
-logger = logging.getLogger("decorate-me")
-
+pkg = Path(__file__).absolute().parent.name
+logger = logging.getLogger(pkg)
+metadata = None
 try:
-    metadata = __load(Path(__file__).parent.name)
+    metadata = __load(Path(__file__).absolute().parent.name)
     __status__ = "Development"
-    __copyright__ = "Copyright 2017–2020"
+    __copyright__ = "Copyright 2017–2021"
     __date__ = "2020-08-24"
     __uri__ = metadata["home-page"]
     __title__ = metadata["name"]
@@ -25,5 +26,5 @@ try:
     __author__ = metadata["author"]
     __maintainer__ = metadata["maintainer"]
     __contact__ = metadata["maintainer"]
-except PackageNotFoundError:
-    logger.error("Failed to import from decorateme", exc_info=True)
+except PackageNotFoundError:  # pragma: no cover
+    logger.error(f"Could not load package metadata for {pkg}. Is it installed?")
