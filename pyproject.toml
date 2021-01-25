@@ -12,7 +12,7 @@ build-backend = "poetry.masonry.api"
 
 [tool.poetry]
 name = "decorateme"
-version = "0.2.0"
+version = "0.2.1"
 description = "Python decorators for str/repr, equality, immutability, and more."
 keywords = ["python", "decorators", "repr"]
 authors = ["Douglas Myers-Turnbull"]

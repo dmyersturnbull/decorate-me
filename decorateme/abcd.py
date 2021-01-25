@@ -141,7 +141,7 @@ class _Utils:
         exclude: Optional[Callable[[str], bool]],
     ):
         if type(self) != type(other):
-            raise TypeError("Type {} is not the same as type {}".format(type(self), type(other)))
+            raise TypeError(f"Type {type(self)} is not the same as type {type(other)}")
         if exclude is None:
             exclude = lambda _: False
         return _Utils.var_values(self, only=only, exclude=exclude) == _Utils.var_values(

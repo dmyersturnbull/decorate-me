@@ -18,7 +18,7 @@ class TestAbcd:
         assert str(x) == "X(s=5)"
         assert (
             re.compile(r"X\(s=5 @ 0x[0-9a-h]+\)").fullmatch(repr(x)) is not None
-        ), "repr is {}".format(repr(x))
+        ), f"repr is {repr(x)}"
         assert hash(x) == hash((5,))
         assert x == X(5)
         assert x != X(6)
